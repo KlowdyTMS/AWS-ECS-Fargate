@@ -36,9 +36,9 @@ app.get("/dogs", async (req, res) => {
   }
 });
 
-app.get('/cats', async (req, res) => {
+app.get("/cats", async (req, res) => {
   try {
-    const response = await axios.get('https://aws.random.cat/meow');
+    const response = await axios.get("http://dog.ceo/api/breeds/image/random");
 
     console.log(JSON.stringify(response.data));
 
@@ -46,7 +46,8 @@ app.get('/cats', async (req, res) => {
     // res.send(
     //   `<img src="${catImage}" alt="random cat" style="max-width: 500px" />`
     // );
-    
+    const { message: dog } = response.data;
+    res.send(`<img src="${dog}" alt="dog" style="max-width: 500px" />`);
   } catch (error) {
     console.error(JSON.stringify(error));
     res.status(500);
